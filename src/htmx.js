@@ -3827,7 +3827,9 @@ return (function () {
                     internalData.xhr.abort();
                 }
             });
-            var originalPopstate = window.onpopstate;
+            /** @type {(ev: PopStateEvent) => any} */
+            const originalPopstate = window.onpopstate.bind(window);
+            /** @type {(ev: PopStateEvent) => any} */
             window.onpopstate = function (event) {
                 if (event.state && event.state.htmx) {
                     restoreHistory();
